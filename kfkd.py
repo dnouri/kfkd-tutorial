@@ -82,8 +82,7 @@ def load(test=False, cols=None):
 
 def load2d(test=False, cols=None):
     X, y = load(test=test, cols=cols)
-    X = X.reshape(-1, 96, 96, 1)
-    X = X.transpose(0, 3, 1, 2)
+    X = X.reshape(-1, 1, 96, 96)
     return X, y
 
 

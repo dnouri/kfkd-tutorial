@@ -39,7 +39,7 @@ np.random.seed(42)
 Conv2DLayer = layers.cuda_convnet.Conv2DCCLayer
 MaxPool2DLayer = layers.cuda_convnet.MaxPool2DCCLayer
 
-FTRAIN = '~/data/kaggle-facial-keypoint-detection/training-cleaned.csv'
+FTRAIN = '~/data/kaggle-facial-keypoint-detection/training.csv'
 FTEST = '~/data/kaggle-facial-keypoint-detection/test.csv'
 FLOOKUP = '~/data/kaggle-facial-keypoint-detection/IdLookupTable.csv'
 

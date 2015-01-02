@@ -188,7 +188,7 @@ net = NeuralNet(
         ('hidden5', layers.DenseLayer),
         ('output', layers.DenseLayer),
         ],
-    input_shape=(128, 1, 96, 96),
+    input_shape=(None, 1, 96, 96),
     conv1_num_filters=32, conv1_filter_size=(3, 3), pool1_ds=(2, 2),
     dropout1_p=0.1,
     conv2_num_filters=64, conv2_filter_size=(2, 2), pool2_ds=(2, 2),

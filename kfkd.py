@@ -32,12 +32,18 @@ from pandas.io.parsers import read_csv
 from sklearn.utils import shuffle
 import theano
 
+try:
+    import pylearn2
+except ImportError:
+    Conv2DLayer = layers.Conv2DLayer
+    MaxPool2DLayer = layers.MaxPool2DLayer
+else:  # Use faster (GPU-only) Conv2DCCLayer only if it's available
+    Conv2DLayer = layers.cuda_convnet.Conv2DCCLayer
+    MaxPool2DLayer = layers.cuda_convnet.MaxPool2DCCLayer
+
 
 sys.setrecursionlimit(10000)  # for pickle...
 np.random.seed(42)
-
-Conv2DLayer = layers.cuda_convnet.Conv2DCCLayer
-MaxPool2DLayer = layers.cuda_convnet.MaxPool2DCCLayer
 
 FTRAIN = '~/data/kaggle-facial-keypoint-detection/training.csv'
 FTEST = '~/data/kaggle-facial-keypoint-detection/test.csv'

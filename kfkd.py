@@ -115,21 +115,19 @@ class FlipBatchIterator(BatchIterator):
     def transform(self, Xb, yb):
         Xb, yb = super(FlipBatchIterator, self).transform(Xb, yb)
 
-        # Don't flip images if we're in 'test' mode:
-        if not self.test:
-            # Flip half of the images in this batch at random:
-            bs = Xb.shape[0]
-            indices = np.random.choice(bs, bs / 2, replace=False)
-            Xb[indices] = Xb[indices, :, :, ::-1]
+        # Flip half of the images in this batch at random:
+        bs = Xb.shape[0]
+        indices = np.random.choice(bs, bs / 2, replace=False)
+        Xb[indices] = Xb[indices, :, :, ::-1]
 
-            if yb is not None:
-                # Horizontal flip of all x coordinates:
-                yb[indices, ::2] = yb[indices, ::2] * -1
+        if yb is not None:
+            # Horizontal flip of all x coordinates:
+            yb[indices, ::2] = yb[indices, ::2] * -1
 
-                # Swap places, e.g. left_eye_center_x -> right_eye_center_x
-                for a, b in self.flip_indices:
-                    yb[indices, a], yb[indices, b] = (
-                        yb[indices, b], yb[indices, a])
+            # Swap places, e.g. left_eye_center_x -> right_eye_center_x
+            for a, b in self.flip_indices:
+                yb[indices, a], yb[indices, b] = (
+                    yb[indices, b], yb[indices, a])
 
         return Xb, yb
 
@@ -204,7 +202,7 @@ net = NeuralNet(
     update_momentum=theano.shared(float32(0.9)),
 
     regression=True,
-    batch_iterator=FlipBatchIterator(batch_size=128),
+    batch_iterator_train=FlipBatchIterator(batch_size=128),
     on_epoch_finished=[
         AdjustVariable('update_learning_rate', start=0.03, stop=0.0001),
         AdjustVariable('update_momentum', start=0.9, stop=0.999),
@@ -297,7 +295,7 @@ def fit_specialists(fname_pretrain=None):
 
         model = clone(net)
         model.output_num_units = y.shape[1]
-        model.batch_iterator.flip_indices = setting['flip_indices']
+        model.batch_iterator_train.flip_indices = setting['flip_indices']
         model.max_epochs = int(4e6 / y.shape[0])
         if 'kwargs' in setting:
             # an option 'kwargs' in the settings list may be used to

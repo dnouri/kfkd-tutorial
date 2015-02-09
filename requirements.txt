@@ -1,3 +1,4 @@
--e git+https://github.com/Theano/Theano.git@ba45997f3d252f1a0674d93b1f073ba136521de2#egg=Theano
--e git+https://github.com/benanne/Lasagne.git@6f23af2cd948b00a30c1428798a73ce0ab123dfb#egg=Lasagne
--e git+https://github.com/dnouri/nolearn.git@ad0b167672af14397ac82401ffd259c88e4f0760#egg=nolearn
+git+https://github.com/Theano/Theano.git@b84464261ffa1d451097ac5e5243dcd8f7e0ff62#egg=Theano
+git+https://github.com/benanne/Lasagne.git@490f45de4d1e9f77969a729588f6971744f423e9#egg=Lasagne
+git+https://github.com/dnouri/nolearn.git@5ac73106947dbb4cc692cb15e3ea4d22e46b173c#egg=nolearn
+

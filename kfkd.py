@@ -33,13 +33,11 @@ from sklearn.utils import shuffle
 import theano
 
 try:
-    import pylearn2
+    from lasagne.layers.cuda_convnet import Conv2DCCLayer as Conv2DLayer
+    from lasagne.layers.cuda_convnet import MaxPool2DCCLayer as MaxPool2DLayer
 except ImportError:
     Conv2DLayer = layers.Conv2DLayer
     MaxPool2DLayer = layers.MaxPool2DLayer
-else:  # Use faster (GPU-only) Conv2DCCLayer only if it's available
-    Conv2DLayer = layers.cuda_convnet.Conv2DCCLayer
-    MaxPool2DLayer = layers.cuda_convnet.MaxPool2DCCLayer
 
 
 sys.setrecursionlimit(10000)  # for pickle...

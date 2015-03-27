@@ -1,4 +1,3 @@
-git+https://github.com/Theano/Theano.git@b84464261ffa1d451097ac5e5243dcd8f7e0ff62#egg=Theano
-git+https://github.com/benanne/Lasagne.git@490f45de4d1e9f77969a729588f6971744f423e9#egg=Lasagne
-git+https://github.com/dnouri/nolearn.git@5ac73106947dbb4cc692cb15e3ea4d22e46b173c#egg=nolearn
-
+Theano==0.7
+git+https://github.com/benanne/Lasagne.git@cd5e396f87#egg=Lasagne
+git+https://github.com/dnouri/nolearn.git@39fa6d4da7#egg=nolearn

@@ -164,12 +164,12 @@ class EarlyStopping(object):
         if current_valid < self.best_valid:
             self.best_valid = current_valid
             self.best_valid_epoch = current_epoch
-            self.best_weights = [w.get_value() for w in nn.get_all_params()]
+            self.best_weights = nn.get_all_params_values()
         elif self.best_valid_epoch + self.patience < current_epoch:
             print("Early stopping.")
             print("Best valid loss was {:.6f} at epoch {}.".format(
                 self.best_valid, self.best_valid_epoch))
-            nn.load_weights_from(self.best_weights)
+            nn.load_params_from(self.best_weights)
             raise StopIteration()
 
 
@@ -309,7 +309,7 @@ def fit_specialists(fname_pretrain=None):
         if net_pretrain is not None:
             # if a pretrain model was given, use it to initialize the
             # weights of our new specialist model:
-            model.load_weights_from(net_pretrain)
+            model.load_params_from(net_pretrain)
 
         print("Training model for columns {} for {} epochs".format(
             cols, model.max_epochs))

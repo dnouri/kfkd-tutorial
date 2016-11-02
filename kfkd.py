@@ -17,7 +17,10 @@ And finally make predictions to submit to Kaggle:
   python kfkd.py predict net-specialists.pickle
 """
 
-import cPickle as pickle
+try:
+    import cPickle as pickle
+except ImportError:  # Python 3
+    import pickle
 from datetime import datetime
 import os
 import sys
@@ -367,7 +370,7 @@ def rebin( a, newshape ):
 
 
 def plot_learning_curves(fname_specialists='net-specialists.pickle'):
-    with open(fname_specialists, 'r') as f:
+    with open(fname_specialists, 'rb') as f:
         models = pickle.load(f)
 
     fig = pyplot.figure(figsize=(10, 6))
